@@ -192,7 +192,7 @@ async function run(context, plugins) {
 
   await plugins.prepare(context);
 
-  if (options.dryRun) {
+  if (options.dryRun || options.noTag) {
     logger.warn(`Skip ${nextRelease.gitTag} tag creation in dry-run mode`);
   } else {
     // Create the tag before calling the publish plugins as some require the tag to exists
