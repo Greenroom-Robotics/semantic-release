@@ -122,6 +122,8 @@ async function run(context, plugins) {
 
       if (options.dryRun) {
         logger.warn(`Skip ${nextRelease.gitTag} tag creation in dry-run mode`);
+      } else if (options.skipTag) {
+        logger.warn(`Skip ${nextRelease.gitTag} tag creation in skip-tag mode`);
       } else {
         await addNote({ channels: [...currentRelease.channels, nextRelease.channel] }, nextRelease.gitTag, {
           cwd,
@@ -203,6 +205,8 @@ async function run(context, plugins) {
 
   if (options.dryRun) {
     logger.warn(`Skip ${nextRelease.gitTag} tag creation in dry-run mode`);
+  } else if (options.skipTag) {
+    logger.warn(`Skip ${nextRelease.gitTag} tag creation in skip-tag mode`);
   } else {
     // Create the tag before calling the publish plugins as some require the tag to exists
     await tag(nextRelease.gitTag, nextRelease.gitHead, { cwd, env });
